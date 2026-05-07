@@ -1,0 +1,246 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Pedido</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-100 text-slate-900">
+
+    <form method="POST" id="orderForm" target="_blank">
+        {% csrf_token %}
+        <input type="hidden" name="cart_data" id="cart_data">
+
+        <div class="max-w-7xl mx-auto py-16 px-6 grid md:grid-cols-3 gap-8">
+
+            <!-- IZQUIERDA -->
+            <div class="md:col-span-2 space-y-6">
+
+                <!-- VOLVER -->
+                <button type="button" onclick="history.back()" class="text-sm text-slate-500 hover:text-slate-900">
+                    ← Volver
+                </button>
+
+                <!-- DATOS CLIENTE -->
+                <div class="bg-white rounded-3xl p-6 border space-y-4">
+
+                    <h2 class="text-lg font-semibold">Datos del cliente</h2>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <input name="customer_name" placeholder="Nombre" class="border rounded-xl p-3">
+
+                        <input name="phone" placeholder="Teléfono" class="border rounded-xl p-3">
+                    </div>
+
+                    <input name="address" placeholder="Dirección" class="w-full border rounded-xl p-3">
+
+                </div>
+
+                <!-- AGREGAR PRODUCTO -->
+                <div class="bg-white rounded-3xl p-6 border">
+
+                    <h2 class="text-lg font-semibold mb-4">
+                        Agregar producto
+                    </h2>
+
+                    <div class="grid md:grid-cols-3 gap-4">
+
+                        <select id="product" class="border rounded-xl p-3">
+                            {% for product in products %}
+                            <option value="{{ product.id }}" data-price="{{ product.price }}">
+                                {{ product.name }} — ${{ product.price }}
+                            </option>
+                            {% endfor %}
+                        </select>
+
+                        <input id="quantity" type="number" placeholder="Cantidad" class="border rounded-xl p-3">
+
+                        <button type="button" onclick="addToCart()" class="bg-slate-900 text-white rounded-xl">
+                            Agregar
+                        </button>
+
+                    </div>
+
+                    <!-- CARRITO -->
+                    <div class="mt-6">
+                        <h3 class="text-sm text-slate-400 uppercase mb-3">
+                            Carrito
+                        </h3>
+
+                        <div id="cart-items"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- DERECHA -->
+            <div class="bg-white rounded-3xl p-6 border h-fit sticky top-24">
+
+                <h3 class="text-lg font-semibold mb-4">
+                    Tu pedido
+                </h3>
+
+                <!-- TOTALES -->
+                <div class="space-y-2 text-sm">
+
+                    <div class="flex justify-between">
+                        <span>Subtotal</span>
+                        <span id="subtotal">$0</span>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <span>IVA</span>
+                        <span id="iva">$0</span>
+                    </div>
+
+                    <div class="flex justify-between font-semibold text-base">
+                        <span>Total</span>
+                        <span id="total">$0</span>
+                    </div>
+
+                </div>
+
+                <!-- BOTÓN -->
+                <button type="submit"
+                    class="mt-6 w-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-semibold py-3 rounded-xl">
+                    Enviar por WhatsApp
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <!-- SCRIPT -->
+    <script>
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const productSelect = document.getElementById("product");
+        const quantityInput = document.getElementById("quantity");
+
+        const cartContainer = document.getElementById("cart-items");
+        const subtotalEl = document.getElementById("subtotal");
+        const ivaEl = document.getElementById("iva");
+        const totalEl = document.getElementById("total");
+
+        document.getElementById("orderForm").addEventListener("submit", function (e) {
+
+            if (cart.length === 0) {
+                e.preventDefault();
+                alert("Agrega al menos un producto al carrito");
+                return;
+            }
+
+            document.getElementById("cart_data").value = JSON.stringify(cart);
+
+            localStorage.removeItem("cart");
+        });
+        // Guardar
+        function saveCart() {
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+
+        // Agregar
+        function addToCart() {
+            const selected = productSelect.options[productSelect.selectedIndex];
+
+            const productId = selected.value;
+            const quantity = parseFloat(quantityInput.value || 0);
+
+            if (!quantity) return;
+
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity += quantity;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: selected.text.split("—")[0].trim(),
+                    price: parseFloat(selected.dataset.price),
+                    quantity: quantity
+                });
+            }
+
+            saveCart();
+            renderCart();
+
+            quantityInput.value = "";
+        }
+
+        // Eliminar
+        function removeItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+        }
+
+        // Editar cantidad
+        function updateQuantity(index, value) {
+            cart[index].quantity = parseFloat(value);
+            saveCart();
+            renderCart();
+        }
+
+        // Render
+        function renderCart() {
+            cartContainer.innerHTML = "";
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                const totalItem = item.price * item.quantity;
+                subtotal += totalItem;
+
+                cartContainer.innerHTML += `
+        <div class="flex justify-between items-center border rounded-xl p-3 mb-2">
+
+            <div>
+                <p class="font-semibold">${item.name}</p>
+                <p class="text-xs text-slate-500">$${item.price}</p>
+            </div>
+
+            <input type="number" value="${item.quantity}"
+                onchange="updateQuantity(${index}, this.value)"
+                class="w-16 border rounded text-center">
+
+            <p>$${Math.round(totalItem)}</p>
+
+            <button onclick="removeItem(${index})"
+                class="text-red-500 font-bold">✕</button>
+        </div>
+        `;
+            });
+
+            const iva = subtotal * 0.19;
+            const total = subtotal + iva;
+
+            subtotalEl.innerText = "$" + Math.round(subtotal);
+            ivaEl.innerText = "$" + Math.round(iva);
+            totalEl.innerText = "$" + Math.round(total);
+        }
+
+        // Enviar carrito al backend
+
+        document.getElementById("orderForm").addEventListener("submit", function () {
+
+            if (cart.length === 0) {
+                alert("Carrito vacío");
+                return false;
+            }
+
+            document.getElementById("cart_data").value = JSON.stringify(cart);
+
+            localStorage.removeItem("cart");
+        });
+        // Init
+        renderCart();
+    </script>
+
+</body>
+
+</html>
