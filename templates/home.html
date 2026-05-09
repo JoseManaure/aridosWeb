@@ -8,367 +8,119 @@
     <link rel="icon" href="{% static 'ico.png' %}">
     <title>Áridos Express</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .sand-particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #facc15;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-10vh) translateX(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(100vh) translateX(20px);
-                opacity: 0;
-            }
-        }
-    </style>
 </head>
 
-<div id="overlay" class="fixed inset-0 bg-black/40 pointer-events-none transition-opacity duration-500"
-    style="background-image: url('{% static 'foto/background.png' %}');"></div>></div>
-
-
-<!-- HEADER -->
-<header class="border-b border-slate-200 sticky top-0 bg-white/90 backdrop-blur z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-
-        <h1 class="text-2xl font-black tracking-tight">
-            Innova & Sergio Silva
-        </h1>
-
-        <nav class="hidden md:flex gap-8 font-medium">
-            <a href="#">Productos</a>
-            <a href="/pedido/">Pedidos</a>
-            <a href="#productos">Contacto</a>
-        </nav>
-
-        <a href="#" class="bg-amber-400 px-5 py-3 rounded-xl font-bold">
-        </a>
-
-    </div>
-</header>
-
-<!-- HERO -->
-<section class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center min-h-[78vh]">
-
-    <!-- TEXTO -->
-    <div>
-
-        <p class="text-amber-400 text-sm tracking-[0.25em] uppercase font-semibold">
-            Venta de Áridos · Penaflor -Talagante -Padre Hurtado
-        </p>
-
-        <h2 class="mt-5 text-3xl md:text-5xl font-semibold leading-tight text-white max-w-xl drop-shadow-xl">
-            Suministro confiable para obras, empresas y proyectos.
-        </h2>
-
-        <p class="mt-6 text-white/85 text-base md:text-lg max-w-lg leading-relaxed">
-            Despacho rápido, atención profesional y cobertura local para clientes exigentes.
-        </p>
-
-        <div class="mt-8 flex gap-4 flex-wrap">
-
-            <a href="pedido"
-                class="bg-amber-400 hover:bg-amber-300 transition px-6 py-3 rounded-2xl font-semibold text-slate-900">
-                Cotizar Ahora
-            </a>
-
-            <a href="#productos"
-                class="border border-white/30 text-white hover:bg-white/10 transition px-6 py-3 rounded-2xl font-semibold">
-                Contacto
-            </a>
-
+<body class="text-slate-900 bg-cover bg-center bg-fixed"
+    style="background-image: url('{% static 'foto/background.png' %}');">
+    <!-- HEADER -->
+    <header class="border-b border-slate-200 sticky top-0 bg-white/90 backdrop-blur z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-black tracking-tight"> Innova & Sergio Silva </h1>
+            <nav class="hidden md:flex gap-8 font-medium"> <a href="#">Productos</a> <a href="/pedido/">Pedidos</a> <a
+                    href="#productos">Contacto</a> </nav> <a href="#"
+                class="bg-amber-400 px-5 py-3 rounded-xl font-bold"> </a>
         </div>
-
-    </div>
-
-    <!-- PANEL PREMIUM (PRODUCTOS) -->
-    <div class="rounded-3xl bg-white/15 backdrop-blur-xl border border-white/20 p-6 shadow-2xl">
-
-        <p class="text-white/70 text-sm mb-4">
-            Productos disponibles
-        </p>
-
-        <div class="grid grid-cols-3 gap-4">
-
-            <!-- ARENA -->
-            <div onclick="changeBackground('arena')" class="group text-center cursor-pointer">
-                <div class="overflow-hidden rounded-xl">
-                    <img src="{% static 'foto/arena.jpg' %}"
-                        class="w-full h-20 object-cover group-hover:scale-110 transition duration-300">
+    </header> <!-- HERO -->
+    <section class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center min-h-[78vh]">
+        <!-- TEXTO -->
+        <div>
+            <p class="text-amber-400 text-sm tracking-[0.25em] uppercase font-semibold"> Venta de Áridos · Penaflor
+                -Talagante -Padre Hurtado </p>
+            <h2 class="mt-5 text-3xl md:text-5xl font-semibold leading-tight text-white max-w-xl drop-shadow-xl">
+                Suministro confiable para obras, empresas y proyectos. </h2>
+            <p class="mt-6 text-white/85 text-base md:text-lg max-w-lg leading-relaxed"> Despacho rápido, atención
+                profesional y cobertura local para clientes exigentes. </p>
+            <div class="mt-8 flex gap-4 flex-wrap"> <a href="pedido"
+                    class="bg-amber-400 hover:bg-amber-300 transition px-6 py-3 rounded-2xl font-semibold text-slate-900">
+                    Cotizar Ahora </a> <a href="#productos"
+                    class="border border-white/30 text-white hover:bg-white/10 transition px-6 py-3 rounded-2xl font-semibold">
+                    Contacto </a> </div>
+        </div> <!-- PANEL PREMIUM (PRODUCTOS) -->
+        <div class="rounded-3xl bg-white/15 backdrop-blur-xl border border-white/20 p-6 shadow-2xl">
+            <p class="text-white/70 text-sm mb-4"> Productos disponibles </p>
+            <div class="grid grid-cols-3 gap-4">
+                <!-- ARENA -->
+                <div class="group text-center">
+                    <div class="overflow-hidden rounded-xl"> <img src="{% static 'foto/arena.jpg' %}"
+                            class="w-full h-20 object-cover group-hover:scale-110 transition duration-300"> </div>
+                    <p class="text-white text-xs mt-2">Arena</p>
+                </div> <!-- GRAVILLA -->
+                <div class="group text-center">
+                    <div class="overflow-hidden rounded-xl"> <img src="{% static 'foto/gravilla.jpg' %}"
+                            class="w-full h-20 object-cover group-hover:scale-110 transition duration-300"> </div>
+                    <p class="text-white text-xs mt-2">Gravilla</p>
+                </div> <!-- RIPIO -->
+                <div class="group text-center">
+                    <div class="overflow-hidden rounded-xl"> <img src="{% static 'foto/ripio.jpg' %}"
+                            class="w-full h-20 object-cover group-hover:scale-110 transition duration-300"> </div>
+                    <p class="text-white text-xs mt-2">Ripio</p>
                 </div>
-                <p class="text-white text-xs mt-2">Arena</p>
             </div>
-
-            <!-- GRAVILLA -->
-            <div onclick="changeBackground('gravilla')" class="group text-center cursor-pointer">
-                <div class="overflow-hidden rounded-xl">
-                    <img src="{% static 'foto/gravilla.jpg' %}"
-                        class="w-full h-20 object-cover group-hover:scale-110 transition duration-300">
-                </div>
-                <p class="text-white text-xs mt-2">Gravilla</p>
-            </div>
-
-            <!-- RIPIO -->
-            <div onclick="changeBackground('ripio')" class="group text-center cursor-pointer">
-                <div class="overflow-hidden rounded-xl">
-                    <img src="{% static 'foto/ripio.jpg' %}"
-                        class="w-full h-20 object-cover group-hover:scale-110 transition duration-300">
-                </div>
-                <p class="text-white text-xs mt-2">Ripio</p>
-            </div>
-
+            <div class="mt-6 pt-4 border-t border-white/15"> <a href="https://wa.me/56937589348"
+                    class="w-full block text-center bg-green-500 hover:bg-green-400 transition text-white font-semibold px-6 py-3 rounded-2xl">
+                    Cotizar por WhatsApp </a> </div>
         </div>
-
-        <div class="mt-6 pt-4 border-t border-white/15">
-            <a href="https://wa.me/56937589348"
-                class="w-full block text-center bg-green-500 hover:bg-green-400 transition text-white font-semibold px-6 py-3 rounded-2xl">
-                Cotizar por WhatsApp
-            </a>
-        </div>
-
-    </div>
-
-</section>
-<!-- PRODUCTOS / CONTACTO MINIMAL -->
-<section id="productos" class="bg-white/80 backdrop-blur py-16">
-    <div class="max-w-5xl mx-auto px-6">
-
-        <h3 class="text-3xl md:text-4xl font-semibold text-center">
-            Quiero Cotizar
-        </h3>
-
-        <p class="text-center text-slate-500 mt-3 mb-10 text-sm md:text-base">
-            Contáctanos y te respondemos en minutos.
-        </p>
-
-        <!-- GRID ULTRA COMPACTO -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-
-            <!-- TEL -->
-            <div class="bg-white/70 border border-slate-200 rounded-2xl p-4">
-                <div class="text-2xl">📞</div>
-                <p class="text-xs text-slate-500 mt-2">Teléfono</p>
-                <p class="text-sm font-medium mt-1">+56 9 3758 9348</p>
-            </div>
-
-            <!-- EMAIL -->
-            <div class="bg-white/70 border border-slate-200 rounded-2xl p-4">
-                <div class="text-2xl">📧</div>
-                <p class="text-xs text-slate-500 mt-2">Correo</p>
-                <p class="text-sm font-medium mt-1">ventas@aridosexpress.cl</p>
-            </div>
-
-            <!-- COBERTURA -->
-            <div class="bg-white/70 border border-slate-200 rounded-2xl p-4">
-                <div class="text-2xl">📍</div>
-                <p class="text-xs text-slate-500 mt-2">Cobertura</p>
-                <p class="text-sm font-medium mt-1">
-                    Peñaflor<br>
-                    Talagante<br>
-                    Padre Hurtado
-                </p>
-            </div>
-
-            <!-- UBICACIÓN -->
-            <div class="bg-white/70 border border-slate-200 rounded-2xl p-4">
-                <div class="text-2xl">🏢</div>
-                <p class="text-xs text-slate-500 mt-2">Ubicación</p>
-                <p class="text-sm font-medium mt-1">
-                    Balmaceda 01091<br>
-                    Peñaflor
-                </p>
-
-                <a href="https://www.google.com/maps/search/?api=1&query=Balmaceda+01091+Peñaflor" target="_blank"
-                    class="inline-block mt-2 text-xs text-blue-600 font-semibold">
-                    Ver mapa →
-                </a>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-
-<!-- SOLUCIONES 
-    <section id="soluciones" class="py-20">
-        <div class="max-w-7xl mx-auto px-6">
-
-            <h3 class="text-5xl font-black mb-12">
-                Soluciones
-            </h3>
-
-            <div class="grid md:grid-cols-3 gap-6">
-
-                <div class="p-8 rounded-3xl border">
-                    <h4 class="text-2xl font-bold">Particulares</h4>
-                    <p class="text-slate-500 mt-4">Pedidos rápidos para hogares y pequeñas obras.</p>
-                </div>
-
-                <div class="p-8 rounded-3xl border">
-                    <h4 class="text-2xl font-bold">Maestros</h4>
-                    <p class="text-slate-500 mt-4">Abastecimiento confiable para trabajos diarios.</p>
-                </div>
-
-                <div class="p-8 rounded-3xl border">
-                    <h4 class="text-2xl font-bold">Empresas</h4>
-                    <p class="text-slate-500 mt-4">Planes mensuales y prioridad logística.</p>
-                </div>
-
-            </div>
-
-        </div>
-    </section> -->
-
-<!-- PEDIDO 
-    <section id="pedido" class="bg-slate-900 text-white py-20">
+    </section> <!-- PRODUCTOS / CONTACTO MINIMAL -->
+    <section id="productos" class="bg-white/80 backdrop-blur py-16">
         <div class="max-w-5xl mx-auto px-6">
-
-            <h3 class="text-5xl font-black mb-10">
-                Solicita tu Pedido
-            </h3>
-
-            <p class="text-slate-300 mb-8">
-                Cotiza por WhatsApp en segundos.
-            </p>
-
-            <a href="https://wa.me/569TU_NUMERO"
-                class="inline-block bg-green-500 px-8 py-5 rounded-2xl font-bold text-xl">
-                WhatsApp Inmediato
-            </a>
-
+            <h3 class="text-3xl md:text-4xl font-semibold text-center"> Quiero Cotizar </h3>
+            <p class="text-center text-slate-500 mt-3 mb-10 text-sm md:text-base"> Contáctanos y te respondemos en
+                minutos. </p> <!-- GRID ULTRA COMPACTO -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <!-- TEL -->
+                <div class="bg-white/70 border border-slate-200 rounded-2xl p-4">
+                    <div class="text-2xl">📞</div>
+                    <p class="text-xs text-slate-500 mt-2">Teléfono</p>
+                    <p class="text-sm font-medium mt-1">+56 9 3758 9348</p>
+                </div> <!-- EMAIL -->
+                <div class="bg-white/70 border border-slate-200 rounded-2xl p-4">
+                    <div class="text-2xl">📧</div>
+                    <p class="text-xs text-slate-500 mt-2">Correo</p>
+                    <p class="text-sm font-medium mt-1">ventas@aridosexpress.cl</p>
+                </div> <!-- COBERTURA -->
+                <div class="bg-white/70 border border-slate-200 rounded-2xl p-4">
+                    <div class="text-2xl">📍</div>
+                    <p class="text-xs text-slate-500 mt-2">Cobertura</p>
+                    <p class="text-sm font-medium mt-1"> Peñaflor<br> Talagante<br> Padre Hurtado </p>
+                </div> <!-- UBICACIÓN -->
+                <div class="bg-white/70 border border-slate-200 rounded-2xl p-4">
+                    <div class="text-2xl">🏢</div>
+                    <p class="text-xs text-slate-500 mt-2">Ubicación</p>
+                    <p class="text-sm font-medium mt-1"> Balmaceda 01091<br> Peñaflor </p> <a
+                        href="https://www.google.com/maps/search/?api=1&query=Balmaceda+01091+Peñaflor" target="_blank"
+                        class="inline-block mt-2 text-xs text-blue-600 font-semibold"> Ver mapa → </a>
+                </div>
+            </div>
         </div>
-    </section> -->
-
-<!-- EMPRESAS -->
-<section id="empresas" class="py-20">
-    <div class="max-w-7xl mx-auto px-6">
-
-        <div class="rounded-3xl bg-amber-400 p-12">
-
-            <h3 class="text-5xl font-black">
-                Convenios para Constructoras
-            </h3>
-
-            <p class="mt-5 text-xl">
-                Precios por volumen, ejecutivo comercial y abastecimiento continuo.
-            </p>
-
+    </section>
+    <!-- SOLUCIONES <section id="soluciones" class="py-20"> <div class="max-w-7xl mx-auto px-6"> <h3 class="text-5xl font-black mb-12"> Soluciones </h3> <div class="grid md:grid-cols-3 gap-6"> <div class="p-8 rounded-3xl border"> <h4 class="text-2xl font-bold">Particulares</h4> <p class="text-slate-500 mt-4">Pedidos rápidos para hogares y pequeñas obras.</p> </div> <div class="p-8 rounded-3xl border"> <h4 class="text-2xl font-bold">Maestros</h4> <p class="text-slate-500 mt-4">Abastecimiento confiable para trabajos diarios.</p> </div> <div class="p-8 rounded-3xl border"> <h4 class="text-2xl font-bold">Empresas</h4> <p class="text-slate-500 mt-4">Planes mensuales y prioridad logística.</p> </div> </div> </div> </section> -->
+    <!-- PEDIDO <section id="pedido" class="bg-slate-900 text-white py-20"> <div class="max-w-5xl mx-auto px-6"> <h3 class="text-5xl font-black mb-10"> Solicita tu Pedido </h3> <p class="text-slate-300 mb-8"> Cotiza por WhatsApp en segundos. </p> <a href="https://wa.me/569TU_NUMERO" class="inline-block bg-green-500 px-8 py-5 rounded-2xl font-bold text-xl"> WhatsApp Inmediato </a> </div> </section> -->
+    <!-- EMPRESAS -->
+    <section id="empresas" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="rounded-3xl bg-amber-400 p-12">
+                <h3 class="text-5xl font-black"> Convenios para Constructoras </h3>
+                <p class="mt-5 text-xl"> Precios por volumen, ejecutivo comercial y abastecimiento continuo. </p>
+            </div>
         </div>
-
-    </div>
-</section>
-
-<!-- FOOTER -->
-<footer id="contacto" class="bg-slate-950 text-white py-12">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-
-        <div>
-            <h4 class="font-bold text-xl">Áridos Express</h4>
-            <p class="text-slate-400 mt-3">Soluciones para construcción en Santiago.</p>
+    </section> <!-- FOOTER -->
+    <footer id="contacto" class="bg-slate-950 text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+            <div>
+                <h4 class="font-bold text-xl">Áridos Express</h4>
+                <p class="text-slate-400 mt-3">Soluciones para construcción en Santiago.</p>
+            </div>
+            <div>
+                <p>WhatsApp</p>
+                <p>Email</p>
+                <p>Teléfono</p>
+            </div>
+            <div>
+                <p>Santiago</p>
+                <p>Región Metropolitana</p>
+            </div>
         </div>
-
-        <div>
-            <p>WhatsApp</p>
-            <p>Email</p>
-            <p>Teléfono</p>
-        </div>
-
-        <div>
-            <p>Santiago</p>
-            <p>Región Metropolitana</p>
-        </div>
-
-    </div>
-</footer>
-<div id="sand-effect" class="pointer-events-none fixed inset-0 hidden z-40"></div>
+    </footer>
 </body>
-<script>
-    const backgrounds = {
-        arena: "{% static 'foto/arena-bg.jpg' %}",
-        gravilla: "{% static 'foto/gravilla-bg.jpg' %}",
-        ripio: "{% static 'foto/ripio-bg.jpg' %}"
-    }
-
-    function changeBackground(type) {
-        const body = document.body
-
-        // efecto fade
-        body.style.transition = "background-image 0.6s ease-in-out"
-
-        body.style.backgroundImage = `url('${backgrounds[type]}')`
-
-        // efecto "cargando"
-        showLoadingEffect(type)
-    }
-
-    function showLoadingEffect(type) {
-        let existing = document.getElementById("loading-effect")
-        if (existing) existing.remove()
-
-        const div = document.createElement("div")
-        div.id = "loading-effect"
-        div.innerText = `Cargando ${type}...`
-        div.style.position = "fixed"
-        div.style.bottom = "30px"
-        div.style.left = "30px"
-        div.style.padding = "10px 20px"
-        div.style.background = "rgba(0,0,0,0.6)"
-        div.style.color = "white"
-        div.style.borderRadius = "12px"
-        div.style.zIndex = "999"
-
-        document.body.appendChild(div)
-
-        setTimeout(() => {
-            div.remove()
-        }, 1500)
-    }
-</script>
-<script>
-    let sandInterval
-
-    function startSandEffect() {
-        const container = document.getElementById("sand-effect")
-        container.classList.remove("hidden")
-
-        sandInterval = setInterval(() => {
-            const particle = document.createElement("div")
-            particle.className = "sand-particle"
-
-            particle.style.left = Math.random() * 100 + "vw"
-            particle.style.animationDuration = (Math.random() * 2 + 2) + "s"
-            particle.style.width = particle.style.height = (Math.random() * 4 + 2) + "px"
-
-            container.appendChild(particle)
-
-            setTimeout(() => {
-                particle.remove()
-            }, 4000)
-        }, 50)
-    }
-
-    function stopSandEffect() {
-        const container = document.getElementById("sand-effect")
-        container.classList.add("hidden")
-
-        clearInterval(sandInterval)
-        container.innerHTML = ""
-    }
-</script>
 
 </html>
