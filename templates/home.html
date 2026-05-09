@@ -8,6 +8,33 @@
     <link rel="icon" href="{% static 'ico.png' %}">
     <title>Áridos Express</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .sand-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #facc15;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 
 <div id="overlay" class="fixed inset-0 bg-black/40 pointer-events-none transition-opacity duration-500"
@@ -268,7 +295,7 @@
 
     </div>
 </footer>
-
+<div id="sand-effect" class="pointer-events-none fixed inset-0 hidden z-40"></div>
 </body>
 <script>
     const backgrounds = {
@@ -310,6 +337,37 @@
         setTimeout(() => {
             div.remove()
         }, 1500)
+    }
+</script>
+<script>
+    let sandInterval
+
+    function startSandEffect() {
+        const container = document.getElementById("sand-effect")
+        container.classList.remove("hidden")
+
+        sandInterval = setInterval(() => {
+            const particle = document.createElement("div")
+            particle.className = "sand-particle"
+
+            particle.style.left = Math.random() * 100 + "vw"
+            particle.style.animationDuration = (Math.random() * 2 + 2) + "s"
+            particle.style.width = particle.style.height = (Math.random() * 4 + 2) + "px"
+
+            container.appendChild(particle)
+
+            setTimeout(() => {
+                particle.remove()
+            }, 4000)
+        }, 50)
+    }
+
+    function stopSandEffect() {
+        const container = document.getElementById("sand-effect")
+        container.classList.add("hidden")
+
+        clearInterval(sandInterval)
+        container.innerHTML = ""
     }
 </script>
 
