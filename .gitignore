@@ -6,6 +6,7 @@ db.sqlite3
 staticfiles/
 .env
 .DS_Store
+staticfiles/
 =======
 ### AL ###
 #Template for AL projects for Dynamics 365 Business Central
